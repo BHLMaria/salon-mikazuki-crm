@@ -9,10 +9,162 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  body { margin: 0; font-family: 'Noto Sans JP', 'Hiragino Sans', system-ui, sans-serif; background: #fafaf9; }
+  body {
+    margin: 0;
+    font-family: 'Noto Sans JP', 'Hiragino Sans', system-ui, sans-serif;
+    color: #44403c;
+    background-color: #faf8f5;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(254, 243, 199, 0.4) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(245, 235, 220, 0.5) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(254, 240, 200, 0.3) 0px, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
   .serif-jp { font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif; }
+  .serif-num { font-family: 'Noto Serif JP', serif; font-feature-settings: 'tnum'; font-weight: 300; }
   .icon { width: 1em; height: 1em; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; }
   .moon-bg { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%); }
+  /* SALON三日月オリジナルスタイル */
+  .mz-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(231, 224, 213, 0.7);
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(120, 113, 108, 0.06), 0 1px 2px rgba(120, 113, 108, 0.04);
+    transition: all 0.3s ease;
+  }
+  .mz-card:hover {
+    box-shadow: 0 4px 12px rgba(180, 140, 80, 0.08), 0 2px 4px rgba(180, 140, 80, 0.05);
+    border-color: rgba(217, 199, 165, 0.8);
+  }
+  .mz-card-flat {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(231, 224, 213, 0.6);
+    border-radius: 0.75rem;
+  }
+  .mz-gold-line {
+    background: linear-gradient(90deg, transparent 0%, rgba(180, 140, 80, 0.3) 20%, rgba(217, 169, 99, 0.5) 50%, rgba(180, 140, 80, 0.3) 80%, transparent 100%);
+    height: 1px;
+  }
+  .mz-divider-moon {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(180, 140, 80, 0.6);
+  }
+  .mz-divider-moon::before,
+  .mz-divider-moon::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(180, 140, 80, 0.3), transparent);
+  }
+  .mz-btn-primary {
+    background: linear-gradient(135deg, #57534e 0%, #44403c 100%);
+    color: #fef3c7;
+    border: 1px solid rgba(180, 140, 80, 0.3);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: all 0.2s;
+  }
+  .mz-btn-primary:hover {
+    background: linear-gradient(135deg, #44403c 0%, #292524 100%);
+    box-shadow: 0 2px 4px rgba(180, 140, 80, 0.15);
+  }
+  .mz-btn-accent {
+    background: linear-gradient(135deg, #d4a04b 0%, #b8862e 100%);
+    color: white;
+    border: none;
+    transition: all 0.2s;
+  }
+  .mz-btn-accent:hover {
+    background: linear-gradient(135deg, #b8862e 0%, #966a1b 100%);
+    box-shadow: 0 2px 6px rgba(180, 140, 80, 0.25);
+  }
+  .mz-header {
+    background: linear-gradient(180deg, rgba(255, 252, 245, 0.95) 0%, rgba(252, 248, 240, 0.85) 100%);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(217, 199, 165, 0.4);
+    box-shadow: 0 1px 3px rgba(180, 140, 80, 0.05);
+  }
+  .mz-nav {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(231, 224, 213, 0.5);
+  }
+  .mz-tab-active {
+    color: #92400e;
+    border-bottom-color: #d4a04b;
+  }
+  .mz-tab-active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -2px;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: #d4a04b;
+    border-radius: 50%;
+  }
+  .mz-moon-icon {
+    color: #d4a04b;
+    filter: drop-shadow(0 0 3px rgba(217, 169, 99, 0.4));
+  }
+  .mz-kpi-amber {
+    background: linear-gradient(135deg, rgba(254, 243, 199, 0.7) 0%, rgba(253, 230, 138, 0.5) 100%);
+    border: 1px solid rgba(217, 169, 99, 0.4);
+    color: #78350f;
+  }
+  .mz-kpi-emerald {
+    background: linear-gradient(135deg, rgba(220, 252, 231, 0.7) 0%, rgba(187, 247, 208, 0.5) 100%);
+    border: 1px solid rgba(110, 169, 119, 0.4);
+    color: #14532d;
+  }
+  .mz-kpi-violet {
+    background: linear-gradient(135deg, rgba(237, 233, 254, 0.7) 0%, rgba(221, 214, 254, 0.5) 100%);
+    border: 1px solid rgba(167, 139, 200, 0.4);
+    color: #5b21b6;
+  }
+  .mz-kpi-stone {
+    background: linear-gradient(135deg, rgba(245, 245, 244, 0.7) 0%, rgba(231, 229, 228, 0.5) 100%);
+    border: 1px solid rgba(168, 162, 158, 0.4);
+    color: #44403c;
+  }
+  .mz-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(217, 199, 165, 0.3);
+    margin-bottom: 1rem;
+  }
+  .mz-section-header::before {
+    content: '◐';
+    color: #d4a04b;
+    font-size: 0.7em;
+  }
+  .mz-input {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(217, 199, 165, 0.5);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .mz-input:focus {
+    outline: none;
+    border-color: #d4a04b;
+    box-shadow: 0 0 0 3px rgba(217, 169, 99, 0.1);
+  }
+  .mz-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.625rem;
+    font-size: 0.75rem;
+    border-radius: 9999px;
+    border-width: 1px;
+  }
   @media print { .no-print { display: none; } }
 </style>
 </head>
@@ -49,6 +201,13 @@
     <symbol id="i-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol>
     <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+    <symbol id="i-link2" viewBox="0 0 24 24"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
   </defs>
 </svg>
 
@@ -129,18 +288,24 @@ function appendAuditLog(action, target, detail = "") {
 // ヘッダー
 // ============================================================
 const Header = ({ currentPage, onNav }) => (
-  <header className="bg-stone-50 border-b border-stone-200 no-print">
-    <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div className="flex items-center gap-2 serif-jp text-stone-800">
-        <Icon name="moon" className="text-amber-600 text-2xl" />
-        <span className="text-lg font-medium">SALON三日月</span>
-        <span className="text-xs text-stone-500 ml-2">顧客管理システム</span>
+  <header className="mz-header no-print">
+    <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="flex items-center gap-3">
+        <div className="relative">
+          <div className="absolute inset-0 rounded-full bg-amber-200/40 blur-md"></div>
+          <Icon name="moon" className="mz-moon-icon text-3xl relative" />
+        </div>
+        <div className="serif-jp">
+          <div className="text-stone-800 text-xl tracking-wider" style={{letterSpacing: '0.08em'}}>SALON<span className="text-amber-700 mx-1">三日月</span></div>
+          <div className="text-[10px] text-stone-500 tracking-widest" style={{letterSpacing: '0.2em'}}>SUITE CUSTOMER RELATIONS</div>
+        </div>
       </div>
-      <div className="text-xs text-stone-500 flex items-center gap-2">
+      <div className="text-xs text-stone-500 flex items-center gap-2 serif-jp">
         <Icon name="shield" className="text-stone-400" />
         <span>サロンスタッフ専用 / 守秘義務下で運用</span>
       </div>
     </div>
+    <div className="mz-gold-line"></div>
   </header>
 );
 
@@ -148,28 +313,29 @@ const Header = ({ currentPage, onNav }) => (
 // ナビゲーション
 // ============================================================
 const NAV_ITEMS = [
-  { key: 'dashboard',  label: 'ダッシュボード',     icon: 'home' },
-  { key: 'customers',  label: '顧客マスター',         icon: 'users' },
-  { key: 'keigetsu',   label: '慧月予約管理',         icon: 'link2' },
-  { key: 'records',    label: '施術記録',             icon: 'clipboard' },
-  { key: 'settings',   label: '設定',                 icon: 'settings' },
+  { key: 'dashboard',   label: 'ダッシュボード',  icon: 'home' },
+  { key: 'reservation', label: '来店予約',         icon: 'calendar' },
+  { key: 'customers',   label: '顧客マスター',     icon: 'users' },
+  { key: 'records',     label: '施術記録',         icon: 'clipboard' },
+  { key: 'keigetsu',    label: '慧月予約',         icon: 'link2' },
+  { key: 'settings',    label: '設定',             icon: 'settings' },
 ];
 
 const Nav = ({ currentPage, onNav }) => (
-  <nav className="bg-white border-b border-stone-200 no-print">
-    <div className="max-w-7xl mx-auto px-4 flex overflow-x-auto">
+  <nav className="mz-nav no-print">
+    <div className="max-w-7xl mx-auto px-4 flex overflow-x-auto serif-jp">
       {NAV_ITEMS.map(item => (
         <button
           key={item.key}
           onClick={() => onNav(item.key)}
-          className={`px-4 py-3 text-sm flex items-center gap-2 border-b-2 whitespace-nowrap transition-colors ${
+          className={`relative px-4 py-3 text-sm flex items-center gap-2 border-b-2 whitespace-nowrap transition-all ${
             currentPage === item.key
-              ? 'border-amber-600 text-amber-700 font-medium'
-              : 'border-transparent text-stone-600 hover:text-stone-900'
+              ? 'mz-tab-active border-amber-500 font-medium'
+              : 'border-transparent text-stone-600 hover:text-amber-700'
           }`}
         >
-          <Icon name={item.icon} />
-          <span>{item.label}</span>
+          <Icon name={item.icon} className={currentPage === item.key ? 'mz-moon-icon' : ''} />
+          <span style={{letterSpacing: '0.05em'}}>{item.label}</span>
         </button>
       ))}
     </div>
@@ -180,12 +346,18 @@ const Nav = ({ currentPage, onNav }) => (
 // フッター
 // ============================================================
 const Footer = () => (
-  <footer className="mt-12 py-6 border-t border-stone-200 bg-stone-50 no-print">
-    <div className="max-w-7xl mx-auto px-4 text-xs text-stone-500 text-center">
-      <div className="serif-jp text-stone-700 mb-1">SALON三日月</div>
-      <div>予防・養生支援を目的としたサービスです(医療行為ではありません)</div>
-      <div className="mt-2 text-stone-400">
-        個人情報保護法・薬機法・景表法に準拠 / 公認心理師の業務範囲内で運用
+  <footer className="mt-12 no-print">
+    <div className="mz-gold-line"></div>
+    <div className="py-6 bg-gradient-to-b from-transparent to-stone-100/40">
+      <div className="max-w-7xl mx-auto px-4 text-xs text-stone-500 text-center">
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <Icon name="moon" className="mz-moon-icon text-lg" />
+          <div className="serif-jp text-stone-700 tracking-wider" style={{letterSpacing: '0.1em'}}>SALON 三日月</div>
+        </div>
+        <div className="serif-jp">予防・養生支援を目的としたサービスです(医療行為ではありません)</div>
+        <div className="mt-2 text-stone-400 text-[11px] serif-jp">
+          個人情報保護法・薬機法・景表法に準拠 / 公認心理師の業務範囲内で運用
+        </div>
       </div>
     </div>
   </footer>
@@ -194,36 +366,78 @@ const Footer = () => (
 // ============================================================
 // ダッシュボード(Phase A: 基本表示のみ、Phase Cで拡張)
 // ============================================================
-const Dashboard = ({ customers, onNav }) => {
+const Dashboard = ({ customers, treatments = [], keigetsuSessions = [], reservations = [], onNav }) => {
   const totalCustomers = customers.length;
   const activeCustomers = customers.filter(c => c.status === 'active').length;
   const today = new Date().toDateString();
   const newToday = customers.filter(c => new Date(c.createdAt).toDateString() === today).length;
   const consentComplete = customers.filter(c => c.consent && c.consent.signedAt).length;
 
-  return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
-      <h2 className="serif-jp text-2xl text-stone-800 mb-2">ダッシュボード</h2>
-      <p className="text-sm text-stone-500 mb-6">本日の概況</p>
+  // Phase B 集計
+  const totalTreatments = treatments.length;
+  const treatmentsToday = treatments.filter(t => t.treatmentDate && new Date(t.treatmentDate).toDateString() === today).length;
+  const keigetsuPending = keigetsuSessions.filter(s => s.status === 'pending').length;
+  const keigetsuToday = keigetsuSessions.filter(s => s.sessionDate && new Date(s.sessionDate).toDateString() === today).length;
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+  // 来店予約集計
+  const reservationsToday = reservations.filter(r => r.reservationDate && new Date(r.reservationDate).toDateString() === today).length;
+  const reservationsPending = reservations.filter(r => r.status === 'pending').length;
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="mb-8">
+        <h2 className="serif-jp text-3xl text-stone-800 tracking-wider" style={{letterSpacing: '0.1em'}}>ダッシュボード</h2>
+        <p className="text-sm text-stone-500 mt-1 serif-jp">本日の概況 ・ {new Date().getFullYear()}年{new Date().getMonth()+1}月{new Date().getDate()}日</p>
+        <div className="mz-divider-moon mt-4">
+          <span className="text-base">☾</span>
+        </div>
+      </div>
+
+      <div className="mb-3 text-xs text-stone-500 serif-jp" style={{letterSpacing: '0.1em'}}>● 顧客</div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <Kpi label="登録顧客数(累計)" value={totalCustomers} suffix="名" icon="users" color="amber" />
         <Kpi label="アクティブ顧客" value={activeCustomers} suffix="名" icon="user" color="emerald" />
         <Kpi label="本日の新規登録" value={newToday} suffix="名" icon="plus" color="stone" />
         <Kpi label="同意取得済み" value={consentComplete} suffix="名" icon="shield" color="stone" />
       </div>
 
-      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+      <div className="mb-3 text-xs text-stone-500 serif-jp" style={{letterSpacing: '0.1em'}}>● 本日の予定</div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <Kpi label="本日の来店予約" value={reservationsToday} suffix="件" icon="calendar" color="amber" />
+        <Kpi label="来店予約(申込中)" value={reservationsPending} suffix="件" icon="calendar" color="stone" />
+        <Kpi label="本日の慧月予約" value={keigetsuToday} suffix="件" icon="link2" color="violet" />
+        <Kpi label="慧月予約(申込中)" value={keigetsuPending} suffix="件" icon="link2" color="stone" />
+      </div>
+
+      <div className="mb-3 text-xs text-stone-500 serif-jp" style={{letterSpacing: '0.1em'}}>● 施術</div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <Kpi label="本日の施術件数" value={treatmentsToday} suffix="件" icon="clipboard" color="amber" />
+        <Kpi label="施術記録(累計)" value={totalTreatments} suffix="件" icon="clipboard" color="stone" />
+      </div>
+
+      <div className="mz-card p-5 mb-8 border-amber-200/60">
         <div className="flex items-start gap-3">
-          <Icon name="alert-circle" className="text-amber-600 text-xl mt-0.5" />
+          <div className="w-10 h-10 rounded-full flex items-center justify-center bg-amber-50 border border-amber-200 flex-shrink-0">
+            <Icon name="alert-circle" className="text-amber-600 text-xl" />
+          </div>
           <div className="text-sm text-stone-700">
-            <div className="font-medium mb-1">Phase A 実装中</div>
-            <div>本ダッシュボードは Phase A の基本表示です。週次・月次・日次の集計、売上目標管理は Phase C で拡張予定です。</div>
+            <div className="font-medium mb-1 serif-jp tracking-wider" style={{letterSpacing: '0.05em'}}>運用について</div>
+            <div className="serif-jp leading-relaxed text-stone-600">
+              顧客マスター・来店予約・慧月予約管理・施術記録が利用できます。<br/>
+              店舗施術予約の自動受信(ホテル予約サイト連携)は <span className="font-medium text-amber-700">6月16日</span> の打ち合わせ後に実装予定です。
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="mb-3 text-xs text-stone-500 serif-jp" style={{letterSpacing: '0.1em'}}>● よく使う機能</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <QuickCard
+          title="来店予約"
+          desc="店舗での施術予約の確認・追加"
+          icon="calendar"
+          onClick={() => onNav('reservation')}
+        />
         <QuickCard
           title="顧客マスター"
           desc="新規顧客の登録・編集・検索"
@@ -231,8 +445,14 @@ const Dashboard = ({ customers, onNav }) => {
           onClick={() => onNav('customers')}
         />
         <QuickCard
-          title="慧月予約管理"
-          desc="オンラインカウンセリング予約の確認"
+          title="施術記録"
+          desc="PT・温熱・エステの施術記録"
+          icon="clipboard"
+          onClick={() => onNav('records')}
+        />
+        <QuickCard
+          title="慧月予約"
+          desc="オンラインカウンセリング予約"
           icon="link2"
           onClick={() => onNav('keigetsu')}
         />
@@ -242,19 +462,20 @@ const Dashboard = ({ customers, onNav }) => {
 };
 
 const Kpi = ({ label, value, suffix, icon, color }) => {
-  const colorMap = {
-    amber:   'bg-amber-50 border-amber-200 text-amber-700',
-    emerald: 'bg-emerald-50 border-emerald-200 text-emerald-700',
-    stone:   'bg-stone-50 border-stone-200 text-stone-700',
+  const klassMap = {
+    amber:   'mz-kpi-amber',
+    emerald: 'mz-kpi-emerald',
+    violet:  'mz-kpi-violet',
+    stone:   'mz-kpi-stone',
   };
   return (
-    <div className={`border rounded-lg p-4 ${colorMap[color] || colorMap.stone}`}>
+    <div className={`rounded-2xl p-4 ${klassMap[color] || klassMap.stone}`}>
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs">{label}</span>
+        <span className="text-xs serif-jp" style={{letterSpacing: '0.05em'}}>{label}</span>
         <Icon name={icon} className="opacity-50" />
       </div>
-      <div className="text-2xl font-medium">
-        {value}<span className="text-sm ml-1 opacity-70">{suffix}</span>
+      <div className="serif-num text-3xl">
+        {value}<span className="text-sm ml-1 opacity-70 serif-jp">{suffix}</span>
       </div>
     </div>
   );
@@ -263,13 +484,15 @@ const Kpi = ({ label, value, suffix, icon, color }) => {
 const QuickCard = ({ title, desc, icon, onClick }) => (
   <button
     onClick={onClick}
-    className="text-left bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-300 hover:shadow-sm transition-all"
+    className="text-left mz-card p-5 group"
   >
     <div className="flex items-center gap-3 mb-2">
-      <Icon name={icon} className="text-amber-600 text-xl" />
-      <span className="font-medium text-stone-800">{title}</span>
+      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 group-hover:from-amber-100 group-hover:to-amber-200 transition-colors">
+        <Icon name={icon} className="text-amber-700 text-xl" />
+      </div>
+      <span className="serif-jp font-medium text-stone-800 text-base tracking-wider">{title}</span>
     </div>
-    <div className="text-sm text-stone-500">{desc}</div>
+    <div className="text-sm text-stone-500 serif-jp pl-13" style={{marginLeft: '3.25rem'}}>{desc}</div>
   </button>
 );
 
@@ -654,7 +877,7 @@ const Consent = ({ label, desc, checked, onChange, required }) => (
 // ============================================================
 // 顧客詳細ページ(タップで開く)
 // ============================================================
-const CustomerDetail = ({ customer, onBack, onEdit }) => {
+const CustomerDetail = ({ customer, onBack, onEdit, treatments = [], keigetsuSessions = [] }) => {
   if (!customer) return null;
 
   const consentItems = [
@@ -748,20 +971,84 @@ const CustomerDetail = ({ customer, onBack, onEdit }) => {
           </Section>
         )}
 
-        {/* 施術記録(Phase B プレースホルダー) */}
+        {/* 施術記録(Phase B 実装) */}
         <Section title="サロン施術記録">
-          <PhasePlaceholder
-            phase="B"
-            desc="PT・温熱療法士・エステティシャンが書き込み、ここから閲覧できるようになります。"
-          />
+          {(() => {
+            const list = treatments.filter(t => t.customerId === customer.id)
+              .slice().sort((a, b) => (b.treatmentDate || '').localeCompare(a.treatmentDate || ''));
+            if (list.length === 0) {
+              return <div className="text-sm text-stone-500">記録なし</div>;
+            }
+            return (
+              <div className="space-y-2">
+                {list.map(t => (
+                  <div key={t.id} className="border border-stone-200 rounded p-3 text-sm">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <StaffRoleBadge role={t.staffRole} />
+                        <span className="text-stone-700 font-medium">{fmtDateTime(t.treatmentDate)}</span>
+                      </div>
+                      <div className="text-xs text-stone-500">{t.staffName || '-'}</div>
+                    </div>
+                    {t.menuName && <div className="text-xs text-stone-600 mb-1">メニュー:{t.menuName}</div>}
+                    {t.clientStatement && (
+                      <div className="text-xs text-stone-600 mt-1">
+                        <span className="text-stone-500">訴え:</span> {t.clientStatement}
+                      </div>
+                    )}
+                    {t.treatmentContent && (
+                      <div className="text-xs text-stone-600 mt-1">
+                        <span className="text-stone-500">ケア:</span> {t.treatmentContent}
+                      </div>
+                    )}
+                    {t.staffRole === 'pt' && t.observation && (
+                      <div className="text-xs text-stone-600 mt-1">
+                        <span className="text-stone-500">観察:</span> {t.observation}
+                      </div>
+                    )}
+                    {t.staffRole === 'pt' && t.medicalReferralNeeded && (
+                      <div className="mt-2 bg-rose-50 border border-rose-200 rounded px-2 py-1 text-xs text-rose-700 flex items-start gap-1">
+                        <Icon name="alert-circle" className="mt-0.5 w-3 h-3" />
+                        <span><strong>医師連携要:</strong> {t.medicalReferralDetail || '内容未記入'}</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
         </Section>
 
-        {/* 慧月カウンセリング記録(Phase B プレースホルダー) */}
+        {/* 慧月カウンセリング記録(Phase B 実装) */}
         <Section title="慧月カウンセリング記録">
-          <PhasePlaceholder
-            phase="B"
-            desc="公認心理師による実施報告(クライアントから発信された事実のみ)がここに表示されます。"
-          />
+          {(() => {
+            const list = keigetsuSessions.filter(s => s.customerId === customer.id || s.customerName === customer.pseudonym)
+              .slice().sort((a, b) => (b.sessionDate || '').localeCompare(a.sessionDate || ''));
+            if (list.length === 0) {
+              return <div className="text-sm text-stone-500">記録なし</div>;
+            }
+            return (
+              <div className="space-y-2">
+                {list.map(s => (
+                  <div key={s.id} className="border border-stone-200 rounded p-3 text-sm">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <KeigetsuStatusBadge status={s.status} />
+                        <span className="text-stone-700 font-medium">{fmtDateTime(s.sessionDate)}</span>
+                        <span className="text-xs text-stone-500">({s.sessionNumber}回目)</span>
+                      </div>
+                      <div className="text-xs text-stone-500">{s.counselorName || '-'}</div>
+                    </div>
+                    {s.factualReport && (
+                      <div className="text-xs text-stone-600 mt-1">
+                        <span className="text-stone-500">発信事実:</span> {s.factualReport}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
         </Section>
 
         {/* 来店履歴(Phase C プレースホルダー) */}
@@ -805,74 +1092,1121 @@ const PhasePlaceholder = ({ phase, desc }) => (
 );
 
 // ============================================================
-// 慧月予約管理(Phase B プレースホルダー)
+// 来店予約(店舗施術予約)管理
+// ホテル予約サイト → CRM、6/16 打ち合わせ後に自動受信を追加予定
 // ============================================================
-const KeigetsuPage = () => (
-  <div className="max-w-5xl mx-auto px-4 py-6">
-    <h2 className="serif-jp text-2xl text-stone-800 mb-2">慧月予約管理</h2>
-    <p className="text-sm text-stone-500 mb-6">公認心理師によるオンラインカウンセリングの予約管理</p>
+const RESERVATION_STATUS = {
+  pending:    { label: '申込中',     bg: 'bg-amber-50',   text: 'text-amber-700',   border: 'border-amber-200' },
+  confirmed:  { label: '確定',       bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
+  completed:  { label: '実施済',     bg: 'bg-stone-100',  text: 'text-stone-700',   border: 'border-stone-300' },
+  cancelled:  { label: 'キャンセル', bg: 'bg-rose-50',    text: 'text-rose-700',    border: 'border-rose-200' },
+  no_show:    { label: '無断欠席',   bg: 'bg-rose-100',   text: 'text-rose-800',    border: 'border-rose-300' },
+};
 
-    <div className="bg-white border border-stone-200 rounded-lg p-6">
-      <PhasePlaceholder
-        phase="B"
-        desc="FMPアプリから送られてくる予約の受信(/intake)・確認・承認・公認心理師の実施報告記録(クライアントから発信された事実のみ)などを Phase B で実装します。"
-      />
+const RESERVATION_SOURCE = {
+  manual:      { label: '手動',       icon: 'plus' },
+  hotel_site:  { label: 'ホテル予約', icon: 'home' },
+  phone:       { label: '電話',       icon: 'phone' },
+  direct:      { label: '直接来店',   icon: 'user' },
+  other:       { label: 'その他',     icon: 'mail' },
+};
 
-      <div className="mt-6 border-t border-stone-100 pt-4 space-y-3 text-xs text-stone-500">
-        <div className="flex items-start gap-2">
-          <Icon name="check-circle" className="text-emerald-600 mt-0.5" />
-          <span>連携方式: FMPアプリ → 予約システム(peaceful-marzipan) → 本体CRM(HMAC署名検証付き)</span>
+const SALON_MENUS = [
+  '新月(温熱60分)',
+  '華月(温熱90分・全身)',
+  '満月(エステ60分)',
+  '望月(エステ90分・フルケア)',
+  '宵月(リラクゼーション45分)',
+  '慧月(PTセッション60分)',
+  '(その他・自由記入)',
+];
+
+const ReservationStatusBadge = ({ status }) => {
+  const s = RESERVATION_STATUS[status] || RESERVATION_STATUS.pending;
+  return (
+    <span className={`mz-pill ${s.bg} ${s.text} ${s.border}`}>{s.label}</span>
+  );
+};
+
+const ReservationSourceBadge = ({ source }) => {
+  const s = RESERVATION_SOURCE[source] || RESERVATION_SOURCE.manual;
+  return (
+    <span className="mz-pill bg-stone-50 text-stone-600 border-stone-200">
+      {s.label}
+    </span>
+  );
+};
+
+const ReservationForm = ({ initial, customers, onSave, onCancel, onDelete }) => {
+  const isEdit = !!(initial && initial.createdAt && initial.id);
+  const [form, setForm] = useState(() => initial || {
+    id: genId('res'),
+    customerId: null,
+    customerName: '',
+    reservationDate: '',
+    menuName: '',
+    expectedStaff: '',
+    expectedStaffRole: 'thermal',
+    estimatedDuration: 60,
+    status: 'pending',
+    source: 'manual',
+    sourceRef: '',
+    contactInfo: '',
+    notes: '',
+    createdAt: nowISO(),
+    updatedAt: nowISO(),
+  });
+
+  const update = (field, v) => setForm({ ...form, [field]: v });
+
+  const handleCustomerSelect = (cid) => {
+    if (!cid) { update('customerId', null); return; }
+    const c = customers.find(x => x.id === cid);
+    setForm({ ...form, customerId: cid, customerName: c ? (c.pseudonym || '') : form.customerName });
+  };
+
+  const handleSubmit = () => {
+    if (!form.customerName.trim()) { alert('顧客名を入力してください。'); return; }
+    if (!form.reservationDate) { alert('予約日時を入力してください。'); return; }
+    const final = { ...form, updatedAt: nowISO() };
+    if (!isEdit) final.createdAt = nowISO();
+    onSave(final);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl">
+        <div className="border-b border-stone-200 px-6 py-4 flex items-center justify-between">
+          <h3 className="serif-jp text-lg text-stone-800 tracking-wider" style={{letterSpacing: '0.08em'}}>
+            {isEdit ? '来店予約の編集' : '来店予約の新規追加'}
+          </h3>
+          <button onClick={onCancel} className="text-stone-400 hover:text-stone-600"><Icon name="x" /></button>
         </div>
-        <div className="flex items-start gap-2">
-          <Icon name="check-circle" className="text-emerald-600 mt-0.5" />
-          <span>記録対象: 日時・完了マーク・クライアントから発信された事実のみ(評価・所感・症状名は記録対象外)</span>
+        <div className="mz-gold-line"></div>
+        <div className="px-6 py-5 space-y-4">
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">顧客マスター(任意・既登録顧客から選択)</label>
+            <select value={form.customerId || ''} onChange={e => handleCustomerSelect(e.target.value)} className="w-full mz-input text-sm">
+              <option value="">(未紐付け / 顧客名のみ入力)</option>
+              {customers.map(c => (
+                <option key={c.id} value={c.id}>{c.pseudonym}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">顧客名 <span className="text-rose-500">*</span></label>
+            <input type="text" value={form.customerName} onChange={e => update('customerName', e.target.value)}
+              className="w-full mz-input text-sm" placeholder="例:山田 花子" />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">予約日時 <span className="text-rose-500">*</span></label>
+              <input type="datetime-local" value={form.reservationDate} onChange={e => update('reservationDate', e.target.value)}
+                className="w-full mz-input text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">所要時間(分)</label>
+              <select value={form.estimatedDuration} onChange={e => update('estimatedDuration', Number(e.target.value))}
+                className="w-full mz-input text-sm">
+                <option value={30}>30分</option>
+                <option value={45}>45分</option>
+                <option value={60}>60分</option>
+                <option value={90}>90分</option>
+                <option value={120}>120分</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">メニュー</label>
+            <select value={SALON_MENUS.includes(form.menuName) ? form.menuName : '(その他・自由記入)'}
+              onChange={e => {
+                if (e.target.value === '(その他・自由記入)') update('menuName', '');
+                else update('menuName', e.target.value);
+              }}
+              className="w-full mz-input text-sm mb-2">
+              {SALON_MENUS.map(m => <option key={m} value={m}>{m}</option>)}
+            </select>
+            {!SALON_MENUS.slice(0, -1).includes(form.menuName) && (
+              <input type="text" value={form.menuName} onChange={e => update('menuName', e.target.value)}
+                className="w-full mz-input text-sm" placeholder="メニュー名を自由入力" />
+            )}
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">担当予定職種</label>
+              <select value={form.expectedStaffRole} onChange={e => update('expectedStaffRole', e.target.value)}
+                className="w-full mz-input text-sm">
+                <option value="thermal">温熱療法士</option>
+                <option value="esthetician">エステティシャン</option>
+                <option value="pt">理学療法士</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">担当予定者名</label>
+              <input type="text" value={form.expectedStaff} onChange={e => update('expectedStaff', e.target.value)}
+                className="w-full mz-input text-sm" />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">状態</label>
+              <select value={form.status} onChange={e => update('status', e.target.value)}
+                className="w-full mz-input text-sm">
+                {Object.entries(RESERVATION_STATUS).map(([k, v]) => (
+                  <option key={k} value={k}>{v.label}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">受信元</label>
+              <select value={form.source} onChange={e => update('source', e.target.value)}
+                className="w-full mz-input text-sm">
+                {Object.entries(RESERVATION_SOURCE).map(([k, v]) => (
+                  <option key={k} value={k}>{v.label}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          {form.source === 'hotel_site' && (
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">ホテル側予約ID(連携時に使用)</label>
+              <input type="text" value={form.sourceRef} onChange={e => update('sourceRef', e.target.value)}
+                className="w-full mz-input text-sm" placeholder="ホテル予約システムからのID" />
+            </div>
+          )}
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">連絡先(任意)</label>
+            <input type="text" value={form.contactInfo} onChange={e => update('contactInfo', e.target.value)}
+              className="w-full mz-input text-sm" placeholder="電話番号やメールアドレス" />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1 serif-jp">運営メモ(任意・対外非開示)</label>
+            <textarea value={form.notes} onChange={e => update('notes', e.target.value)}
+              rows={2} className="w-full mz-input text-sm" />
+          </div>
         </div>
-        <div className="flex items-start gap-2">
-          <Icon name="check-circle" className="text-emerald-600 mt-0.5" />
-          <span>公認心理師はサロンに来訪せず、Zoomでのオンラインのみ実施</span>
+        <div className="mz-gold-line"></div>
+        <div className="px-6 py-4 flex items-center justify-between">
+          <div>
+            {isEdit && (
+              <button onClick={() => onDelete && onDelete(form.id)} className="px-3 py-1.5 text-xs bg-rose-50 text-rose-700 border border-rose-200 rounded-lg hover:bg-rose-100">
+                この予約を削除
+              </button>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <button onClick={onCancel} className="px-4 py-2 text-sm border border-stone-300 rounded-lg text-stone-600 hover:bg-stone-50">キャンセル</button>
+            <button onClick={handleSubmit} className="px-5 py-2 text-sm mz-btn-primary rounded-lg">{isEdit ? '更新' : '登録'}</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
+
+const ReservationPage = ({ reservations, customers, onSave, onDelete }) => {
+  const [filter, setFilter] = useState('all');
+  const [filterSource, setFilterSource] = useState('all');
+  const [editing, setEditing] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  const filtered = reservations
+    .filter(r => filter === 'all' || r.status === filter)
+    .filter(r => filterSource === 'all' || r.source === filterSource)
+    .slice().sort((a, b) => (b.reservationDate || '').localeCompare(a.reservationDate || ''));
+
+  const openNew = () => { setEditing(null); setShowForm(true); };
+  const openEdit = (r) => { setEditing(r); setShowForm(true); };
+  const closeForm = () => { setShowForm(false); setEditing(null); };
+
+  const handleSave = (r) => { onSave(r); closeForm(); };
+  const handleDelete = (id) => {
+    if (!confirm('この予約を削除します。よろしいですか?')) return;
+    onDelete(id);
+    closeForm();
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="flex items-start justify-between mb-2">
+        <div>
+          <h2 className="serif-jp text-3xl text-stone-800 tracking-wider" style={{letterSpacing: '0.1em'}}>来店予約</h2>
+          <p className="text-sm text-stone-500 mt-1 serif-jp">店舗での施術予約の確認・管理</p>
+        </div>
+        <button onClick={openNew} className="px-4 py-2 mz-btn-accent text-sm rounded-lg flex items-center gap-1 serif-jp">
+          <Icon name="plus" /> 新規追加
+        </button>
+      </div>
+      <div className="mz-divider-moon mt-4 mb-5"><span className="text-base">☾</span></div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+        <div>
+          <label className="block text-xs font-medium text-stone-600 mb-2 serif-jp">状態で絞り込み</label>
+          <div className="flex flex-wrap gap-2">
+            <button onClick={() => setFilter('all')}
+              className={`px-3 py-1 text-xs rounded-full border serif-jp ${filter === 'all' ? 'mz-btn-primary border-stone-800' : 'bg-white text-stone-600 border-stone-300 hover:bg-stone-50'}`}>
+              全て
+            </button>
+            {Object.entries(RESERVATION_STATUS).map(([k, v]) => (
+              <button key={k} onClick={() => setFilter(k)}
+                className={`px-3 py-1 text-xs rounded-full border serif-jp ${filter === k ? 'mz-btn-primary border-stone-800' : 'bg-white text-stone-600 border-stone-300 hover:bg-stone-50'}`}>
+                {v.label} <span className="opacity-75">({reservations.filter(r => r.status === k).length})</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-stone-600 mb-2 serif-jp">受信元で絞り込み</label>
+          <div className="flex flex-wrap gap-2">
+            <button onClick={() => setFilterSource('all')}
+              className={`px-3 py-1 text-xs rounded-full border serif-jp ${filterSource === 'all' ? 'mz-btn-primary border-stone-800' : 'bg-white text-stone-600 border-stone-300 hover:bg-stone-50'}`}>
+              全て
+            </button>
+            {Object.entries(RESERVATION_SOURCE).map(([k, v]) => (
+              <button key={k} onClick={() => setFilterSource(k)}
+                className={`px-3 py-1 text-xs rounded-full border serif-jp ${filterSource === k ? 'mz-btn-primary border-stone-800' : 'bg-white text-stone-600 border-stone-300 hover:bg-stone-50'}`}>
+                {v.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {filtered.length === 0 ? (
+        <div className="mz-card p-16 text-center border-dashed">
+          <div className="text-stone-400 mb-3"><Icon name="calendar" className="w-12 h-12 mx-auto" /></div>
+          <div className="text-sm text-stone-500 serif-jp">該当する予約はありません</div>
+          <button onClick={openNew} className="mt-4 text-xs text-amber-700 hover:underline serif-jp">新しい予約を追加する →</button>
+        </div>
+      ) : (
+        <div className="mz-card overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-stone-50/60 border-b border-stone-200">
+              <tr className="text-left text-xs text-stone-600 serif-jp">
+                <th className="px-4 py-3" style={{letterSpacing: '0.05em'}}>予約日時</th>
+                <th className="px-4 py-3" style={{letterSpacing: '0.05em'}}>顧客名</th>
+                <th className="px-4 py-3" style={{letterSpacing: '0.05em'}}>メニュー</th>
+                <th className="px-4 py-3" style={{letterSpacing: '0.05em'}}>担当予定</th>
+                <th className="px-4 py-3" style={{letterSpacing: '0.05em'}}>状態</th>
+                <th className="px-4 py-3" style={{letterSpacing: '0.05em'}}>受信元</th>
+                <th className="px-4 py-3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map(r => (
+                <tr key={r.id} className="border-b border-stone-100 hover:bg-amber-50/30 cursor-pointer transition-colors" onClick={() => openEdit(r)}>
+                  <td className="px-4 py-3 text-stone-700 serif-num">{fmtDateTime(r.reservationDate)}</td>
+                  <td className="px-4 py-3 font-medium text-stone-800 serif-jp">{r.customerName || '-'}</td>
+                  <td className="px-4 py-3 text-stone-600 serif-jp text-xs">{r.menuName || '-'}</td>
+                  <td className="px-4 py-3 text-stone-600 text-xs serif-jp">{r.expectedStaff || '-'}</td>
+                  <td className="px-4 py-3"><ReservationStatusBadge status={r.status} /></td>
+                  <td className="px-4 py-3"><ReservationSourceBadge source={r.source} /></td>
+                  <td className="px-4 py-3 text-right"><Icon name="chevron-right" className="text-stone-400" /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      <div className="mt-8 mz-card p-5 border-amber-100/60">
+        <div className="text-xs text-stone-600 serif-jp space-y-2">
+          <div className="font-medium text-stone-700 flex items-center gap-2">
+            <Icon name="info" className="w-3 h-3 text-amber-600" />
+            <span style={{letterSpacing: '0.05em'}}>運用について</span>
+          </div>
+          <div className="flex items-start gap-2 pl-5">
+            <Icon name="check-circle" className="text-emerald-600 mt-0.5 w-3 h-3" />
+            <span><strong>現状:</strong> 手動入力・電話・直接来店の予約を手動で記録</span>
+          </div>
+          <div className="flex items-start gap-2 pl-5">
+            <Icon name="clock" className="text-amber-600 mt-0.5 w-3 h-3" />
+            <span><strong>6/16 打ち合わせ後:</strong> ホテル予約サイトからの自動受信機能を追加予定</span>
+          </div>
+          <div className="flex items-start gap-2 pl-5">
+            <Icon name="alert-circle" className="text-stone-400 mt-0.5 w-3 h-3" />
+            <span>連携方式(メール/Webhook/CSV 等)は 6/16 の打ち合わせで確定します。</span>
+          </div>
+        </div>
+      </div>
+
+      {showForm && (
+        <ReservationForm
+          initial={editing}
+          customers={customers}
+          onSave={handleSave}
+          onCancel={closeForm}
+          onDelete={handleDelete}
+        />
+      )}
+    </div>
+  );
+};
 
 // ============================================================
-// 施術記録(Phase B プレースホルダー)
+// 慧月予約管理(Phase B 実装)
 // ============================================================
-const RecordsPage = () => (
-  <div className="max-w-5xl mx-auto px-4 py-6">
-    <h2 className="serif-jp text-2xl text-stone-800 mb-2">施術記録</h2>
-    <p className="text-sm text-stone-500 mb-6">サロン施術の記録(PT・温熱療法士・エステティシャン)</p>
+const KEIGETSU_STATUS = {
+  pending:   { label: '申込中',   bg: 'bg-amber-50',   text: 'text-amber-700',   border: 'border-amber-200' },
+  approved:  { label: '承認済',   bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
+  completed: { label: '実施済',   bg: 'bg-stone-100',  text: 'text-stone-700',   border: 'border-stone-300' },
+  cancelled: { label: 'キャンセル', bg: 'bg-rose-50',  text: 'text-rose-700',    border: 'border-rose-200' },
+};
 
-    <div className="bg-white border border-stone-200 rounded-lg p-6">
-      <PhasePlaceholder
-        phase="B"
-        desc="専門職別の書き込みフォーム、顧客別の記録一覧、医師連携の要否管理などを Phase B で実装します。"
-      />
+const KeigetsuStatusBadge = ({ status }) => {
+  const s = KEIGETSU_STATUS[status] || KEIGETSU_STATUS.pending;
+  return (
+    <span className={`inline-block px-2 py-0.5 text-xs rounded-full border ${s.bg} ${s.text} ${s.border}`}>
+      {s.label}
+    </span>
+  );
+};
 
-      <div className="mt-6 border-t border-stone-100 pt-4 space-y-3 text-xs text-stone-500">
-        <div className="font-medium text-stone-700 mb-2">専門職別の記録対象(法令準拠)</div>
+// 公認心理師への通知メール送信パネル(Vercel Functions経由でResendを呼び出す)
+const NotifyCounselorPanel = ({ form, onNotified }) => {
+  const [sending, setSending] = useState(false);
+  const [result, setResult] = useState(null); // null | { type: 'success' | 'error', msg: string }
+
+  const sendAutomatic = async () => {
+    if (!form.counselorEmail) {
+      alert('公認心理師のメールアドレスを入力してください。');
+      return;
+    }
+    setSending(true);
+    setResult(null);
+
+    try {
+      const response = await fetch('/api/notify-counselor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          counselorEmail: form.counselorEmail,
+          counselorName: form.counselorName,
+          customerName: form.customerName,
+          sessionDate: form.sessionDate,
+          sessionNumber: form.sessionNumber,
+          zoomUrl: form.zoomUrl,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        const sentAt = data.sentAt || nowISO();
+        setResult({ type: 'success', msg: `送信完了:${form.counselorEmail} へ配信しました。` });
+        onNotified(sentAt);
+        appendAuditLog('notify', `keigetsu:${form.id}`, `to=${form.counselorEmail}, messageId=${data.messageId || ''}`);
+      } else {
+        const errMsg = data.error || 'メール送信に失敗しました。';
+        setResult({ type: 'error', msg: errMsg });
+      }
+    } catch (error) {
+      setResult({ type: 'error', msg: error.message || 'ネットワークエラー。Vercel Functions または Resend の設定をご確認ください。' });
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const openMailtoFallback = () => {
+    const subject = encodeURIComponent(`【SALON三日月】慧月予約のお知らせ - ${form.customerName} 様`);
+    const dt = form.sessionDate ? fmtDateTime(form.sessionDate) : '(日時未定)';
+    const body = encodeURIComponent(
+      `${form.counselorName || '公認心理師'} 様\n\n` +
+      `SALON三日月よりオンラインカウンセリング(慧月)の予約をお知らせいたします。\n\n` +
+      `─────────────────────\n` +
+      `■ クライアント:${form.customerName}\n` +
+      `■ 予約日時:${dt}\n` +
+      `■ セッション回:${form.sessionNumber}回目(全2回)\n` +
+      (form.zoomUrl ? `■ Zoom URL:${form.zoomUrl}\n` : '') +
+      `─────────────────────\n\n` +
+      `※ 公認心理師法に基づき、クライアントから発信された事実のみをご記録ください。\n\n` +
+      `当日はよろしくお願いいたします。\n\nSALON三日月\n`
+    );
+    window.location.href = `mailto:${form.counselorEmail}?subject=${subject}&body=${body}`;
+    onNotified(nowISO());
+  };
+
+  return (
+    <div className="bg-violet-50/40 border border-violet-200 rounded-lg p-3 space-y-2">
+      <div className="flex items-center justify-between">
+        <div className="text-xs font-medium text-violet-800 flex items-center gap-1">
+          <Icon name="bell" className="w-3 h-3" />
+          公認心理師への自動通知
+        </div>
+        {form.notifiedAt && (
+          <span className="text-xs text-violet-700 bg-violet-100 px-2 py-0.5 rounded-full">
+            通知済 {fmtDateTime(form.notifiedAt)}
+          </span>
+        )}
+      </div>
+
+      <button
+        type="button"
+        onClick={sendAutomatic}
+        disabled={sending}
+        className="w-full px-3 py-2 text-sm bg-violet-600 text-white rounded hover:bg-violet-700 disabled:bg-violet-300 disabled:cursor-wait flex items-center justify-center gap-2 transition-colors"
+      >
+        {sending ? (
+          <>
+            <span className="inline-block w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            <span>送信中...</span>
+          </>
+        ) : (
+          <>
+            <Icon name="send" />
+            <span>{form.notifiedAt ? '自動で再送信' : '自動で通知メール送信'}</span>
+          </>
+        )}
+      </button>
+
+      {result && result.type === 'success' && (
+        <div className="text-xs text-emerald-800 bg-emerald-50 border border-emerald-200 rounded px-2 py-1.5 flex items-start gap-1">
+          <Icon name="check-circle" className="mt-0.5 w-3 h-3 flex-shrink-0" />
+          <span>{result.msg}</span>
+        </div>
+      )}
+
+      {result && result.type === 'error' && (
+        <div className="text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded px-2 py-1.5 space-y-1">
+          <div className="flex items-start gap-1">
+            <Icon name="alert-circle" className="mt-0.5 w-3 h-3 flex-shrink-0" />
+            <span><strong>送信エラー:</strong> {result.msg}</span>
+          </div>
+          <button
+            type="button"
+            onClick={openMailtoFallback}
+            className="text-xs text-violet-700 hover:underline ml-4 cursor-pointer"
+          >
+            → 代わりにメーラーで開く(手動送信)
+          </button>
+        </div>
+      )}
+
+      <div className="text-xs text-violet-700 flex items-start gap-1">
+        <Icon name="info" className="mt-0.5 w-3 h-3 flex-shrink-0" />
+        <span>「自動で通知メール送信」を押すと、公認心理師のメールアドレスへ自動で配信されます(Vercel Functions + Resend経由)。</span>
+      </div>
+    </div>
+  );
+};
+
+const KeigetsuForm = ({ initial, customers, onSave, onCancel, onDelete }) => {
+  const isEdit = !!(initial && initial.createdAt && initial.id);
+  const [form, setForm] = useState(() => initial || {
+    id: genId('ks'),
+    customerId: null,
+    customerName: '',
+    sessionDate: '',
+    sessionNumber: 1,
+    status: 'pending',
+    source: 'manual',
+    zoomUrl: '',
+    counselorName: '',
+    counselorEmail: '',
+    notifiedAt: '',
+    factualReport: '',
+    notes: '',
+    createdAt: nowISO(),
+    updatedAt: nowISO(),
+  });
+
+  const update = (field, v) => setForm({ ...form, [field]: v });
+
+  const handleCustomerSelect = (cid) => {
+    if (!cid) { update('customerId', null); return; }
+    const c = customers.find(x => x.id === cid);
+    setForm({ ...form, customerId: cid, customerName: c ? (c.pseudonym || '') : form.customerName });
+  };
+
+  const handleSubmit = () => {
+    if (!form.customerName.trim()) { alert('顧客名を入力してください。'); return; }
+    if (!form.sessionDate) { alert('予約日時を入力してください。'); return; }
+    const final = { ...form, updatedAt: nowISO() };
+    if (!isEdit) final.createdAt = nowISO();
+    onSave(final);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="border-b border-stone-200 px-5 py-3 flex items-center justify-between">
+          <h3 className="serif-jp text-lg text-stone-800">{isEdit ? '慧月予約の編集' : '慧月予約の新規追加'}</h3>
+          <button onClick={onCancel} className="text-stone-400 hover:text-stone-600"><Icon name="x" /></button>
+        </div>
+        <div className="px-5 py-4 space-y-4">
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">顧客マスター(任意・既登録顧客から選択)</label>
+            <select value={form.customerId || ''} onChange={e => handleCustomerSelect(e.target.value)} className="w-full border border-stone-300 rounded px-3 py-2 text-sm">
+              <option value="">(未紐付け / 仮名のみ入力)</option>
+              {customers.map(c => (
+                <option key={c.id} value={c.id}>{c.pseudonym}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">顧客名(必須・表示用) <span className="text-rose-500">*</span></label>
+            <input type="text" value={form.customerName} onChange={e => update('customerName', e.target.value)}
+              className="w-full border border-stone-300 rounded px-3 py-2 text-sm" placeholder="例:山田 花子" />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">予約日時 <span className="text-rose-500">*</span></label>
+              <input type="datetime-local" value={form.sessionDate} onChange={e => update('sessionDate', e.target.value)}
+                className="w-full border border-stone-300 rounded px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">セッション回(最大2回)</label>
+              <select value={form.sessionNumber} onChange={e => update('sessionNumber', Number(e.target.value))}
+                className="w-full border border-stone-300 rounded px-3 py-2 text-sm">
+                <option value={1}>1回目</option>
+                <option value={2}>2回目</option>
+              </select>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">状態</label>
+              <select value={form.status} onChange={e => update('status', e.target.value)}
+                className="w-full border border-stone-300 rounded px-3 py-2 text-sm">
+                {Object.entries(KEIGETSU_STATUS).map(([k, v]) => (
+                  <option key={k} value={k}>{v.label}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">受信元</label>
+              <select value={form.source} onChange={e => update('source', e.target.value)}
+                className="w-full border border-stone-300 rounded px-3 py-2 text-sm">
+                <option value="manual">手動入力</option>
+                <option value="fmp_app">FMPアプリ</option>
+              </select>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">公認心理師名</label>
+              <input type="text" value={form.counselorName} onChange={e => update('counselorName', e.target.value)}
+                className="w-full border border-stone-300 rounded px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">公認心理師メール(通知先)</label>
+              <input type="email" value={form.counselorEmail} onChange={e => update('counselorEmail', e.target.value)}
+                className="w-full border border-stone-300 rounded px-3 py-2 text-sm" placeholder="counselor@example.com" />
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">Zoom URL(任意)</label>
+            <input type="url" value={form.zoomUrl} onChange={e => update('zoomUrl', e.target.value)}
+              className="w-full border border-stone-300 rounded px-3 py-2 text-sm" placeholder="https://zoom.us/..." />
+          </div>
+
+          {/* 公認心理師通知 */}
+          {form.counselorEmail && (
+            <NotifyCounselorPanel
+              form={form}
+              onNotified={(at) => setForm(prev => ({ ...prev, notifiedAt: at }))}
+            />
+          )}
+
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">
+              実施報告(クライアント発信の事実のみ・評価/所感/症状名は記録対象外)
+            </label>
+            <textarea value={form.factualReport} onChange={e => update('factualReport', e.target.value)}
+              rows={4} className="w-full border border-stone-300 rounded px-3 py-2 text-sm"
+              placeholder="例:クライアントから「最近よく眠れている」との発言があった" />
+            <div className="text-xs text-amber-700 mt-1 flex items-start gap-1">
+              <Icon name="alert-circle" className="mt-0.5 w-3 h-3" />
+              <span>公認心理師法に基づき、診断・評価・症状名・所感は記録しません。クライアントが自ら発した内容のみを記録します。</span>
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">運営メモ(任意・対外非開示)</label>
+            <textarea value={form.notes} onChange={e => update('notes', e.target.value)}
+              rows={2} className="w-full border border-stone-300 rounded px-3 py-2 text-sm" />
+          </div>
+        </div>
+        <div className="border-t border-stone-200 px-5 py-3 flex items-center justify-between">
+          <div>
+            {isEdit && (
+              <button onClick={() => onDelete && onDelete(form.id)} className="px-3 py-1.5 text-xs bg-rose-50 text-rose-700 border border-rose-200 rounded hover:bg-rose-100">
+                この予約を削除
+              </button>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <button onClick={onCancel} className="px-4 py-2 text-sm border border-stone-300 rounded text-stone-600 hover:bg-stone-50">キャンセル</button>
+            <button onClick={handleSubmit} className="px-4 py-2 text-sm bg-stone-800 text-white rounded hover:bg-stone-900">{isEdit ? '更新' : '登録'}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const fmtDateTime = (iso) => {
+  if (!iso) return '-';
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return '-';
+  return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+};
+
+const KeigetsuPage = ({ sessions, customers, onSave, onDelete }) => {
+  const [filter, setFilter] = useState('all');
+  const [editing, setEditing] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  const filtered = sessions.filter(s => filter === 'all' || s.status === filter)
+    .slice().sort((a, b) => (b.sessionDate || '').localeCompare(a.sessionDate || ''));
+
+  const openNew = () => { setEditing(null); setShowForm(true); };
+  const openEdit = (s) => { setEditing(s); setShowForm(true); };
+  const closeForm = () => { setShowForm(false); setEditing(null); };
+
+  const handleSave = (s) => { onSave(s); closeForm(); };
+  const handleDelete = (id) => {
+    if (!confirm('この予約を削除します。よろしいですか?')) return;
+    onDelete(id);
+    closeForm();
+  };
+
+  return (
+    <div className="max-w-5xl mx-auto px-4 py-6">
+      <div className="flex items-start justify-between mb-2">
+        <div>
+          <h2 className="serif-jp text-2xl text-stone-800">慧月予約管理</h2>
+          <p className="text-sm text-stone-500">公認心理師によるオンラインカウンセリングの予約管理</p>
+        </div>
+        <button onClick={openNew} className="px-3 py-2 bg-stone-800 text-white text-sm rounded hover:bg-stone-900 flex items-center gap-1">
+          <Icon name="plus" /> 新規追加
+        </button>
+      </div>
+
+      <div className="mt-4 mb-4 flex flex-wrap gap-2">
+        {[['all', '全て'], ['pending', '申込中'], ['approved', '承認済'], ['completed', '実施済'], ['cancelled', 'キャンセル']].map(([k, l]) => (
+          <button key={k} onClick={() => setFilter(k)}
+            className={`px-3 py-1 text-xs rounded-full border ${filter === k ? 'bg-stone-800 text-white border-stone-800' : 'bg-white text-stone-600 border-stone-300 hover:bg-stone-50'}`}>
+            {l}
+            {k !== 'all' && <span className="ml-1 opacity-75">({sessions.filter(s => s.status === k).length})</span>}
+          </button>
+        ))}
+      </div>
+
+      {filtered.length === 0 ? (
+        <div className="bg-white border border-stone-200 border-dashed rounded-lg p-12 text-center">
+          <div className="text-stone-400 mb-2"><Icon name="calendar" className="w-12 h-12 mx-auto" /></div>
+          <div className="text-sm text-stone-500">該当する予約はありません</div>
+          <button onClick={openNew} className="mt-3 text-xs text-amber-700 hover:underline">新しい予約を追加する →</button>
+        </div>
+      ) : (
+        <div className="bg-white border border-stone-200 rounded-lg overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-stone-50 border-b border-stone-200">
+              <tr className="text-left text-xs text-stone-600">
+                <th className="px-3 py-2">予約日時</th>
+                <th className="px-3 py-2">顧客名</th>
+                <th className="px-3 py-2">回数</th>
+                <th className="px-3 py-2">担当</th>
+                <th className="px-3 py-2">状態</th>
+                <th className="px-3 py-2">受信元</th>
+                <th className="px-3 py-2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map(s => (
+                <tr key={s.id} className="border-b border-stone-100 hover:bg-amber-50/30 cursor-pointer" onClick={() => openEdit(s)}>
+                  <td className="px-3 py-2 text-stone-700">{fmtDateTime(s.sessionDate)}</td>
+                  <td className="px-3 py-2 font-medium text-stone-800">{s.customerName || '-'}</td>
+                  <td className="px-3 py-2 text-stone-600">{s.sessionNumber}回目</td>
+                  <td className="px-3 py-2 text-stone-600">{s.counselorName || '-'}</td>
+                  <td className="px-3 py-2"><KeigetsuStatusBadge status={s.status} /></td>
+                  <td className="px-3 py-2 text-xs text-stone-500">{s.source === 'fmp_app' ? 'FMP' : '手動'}</td>
+                  <td className="px-3 py-2 text-right">
+                    {s.notifiedAt && (
+                      <span className="inline-block px-2 py-0.5 text-[10px] rounded-full bg-violet-50 text-violet-700 border border-violet-200 mr-2" title={`通知済 ${fmtDateTime(s.notifiedAt)}`}>
+                        <Icon name="bell" className="w-2.5 h-2.5 inline mr-0.5" />通知済
+                      </span>
+                    )}
+                    <Icon name="chevron-right" className="text-stone-400 inline" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      <div className="mt-6 bg-stone-50 border border-stone-200 rounded p-3 space-y-2 text-xs text-stone-500">
+        <div className="font-medium text-stone-700">運用上のルール(法令準拠)</div>
         <div className="flex items-start gap-2">
-          <Icon name="check-circle" className="text-emerald-600 mt-0.5" />
-          <span><strong>理学療法士(PT)</strong>: クライアントの訴え + 専門職としての観察・評価 + 実施したケア内容 + 医師連携の要否</span>
+          <Icon name="check-circle" className="text-emerald-600 mt-0.5 w-3 h-3" />
+          <span>公認心理師は対面しません(Zoomのみ)。サロンには来訪しません。</span>
         </div>
         <div className="flex items-start gap-2">
-          <Icon name="check-circle" className="text-emerald-600 mt-0.5" />
-          <span><strong>温熱療法士・エステティシャン</strong>: クライアントの訴え + 実施した施術内容</span>
+          <Icon name="check-circle" className="text-emerald-600 mt-0.5 w-3 h-3" />
+          <span>記録対象は「クライアントから発信された事実」のみ。診断・評価・症状名は記録しません(公認心理師法準拠)。</span>
         </div>
         <div className="flex items-start gap-2">
-          <Icon name="alert-circle" className="text-amber-600 mt-0.5" />
+          <Icon name="alert-circle" className="text-amber-600 mt-0.5 w-3 h-3" />
+          <span>連携方式(FMPアプリ → 予約システム → CRM)の自動受信は別途実装。現状は手動入力で運用。</span>
+        </div>
+      </div>
+
+      {showForm && (
+        <KeigetsuForm
+          initial={editing}
+          customers={customers}
+          onSave={handleSave}
+          onCancel={closeForm}
+          onDelete={handleDelete}
+        />
+      )}
+    </div>
+  );
+};
+
+// ============================================================
+// 施術記録(Phase B 実装)
+// ============================================================
+const STAFF_ROLES = {
+  pt:          { label: '理学療法士', short: 'PT',     color: 'sky' },
+  thermal:     { label: '温熱療法士', short: '温熱',   color: 'amber' },
+  esthetician: { label: 'エステティシャン', short: 'エステ', color: 'rose' },
+};
+
+const StaffRoleBadge = ({ role }) => {
+  const r = STAFF_ROLES[role] || STAFF_ROLES.thermal;
+  const colorMap = {
+    sky:   'bg-sky-50 text-sky-700 border-sky-200',
+    amber: 'bg-amber-50 text-amber-700 border-amber-200',
+    rose:  'bg-rose-50 text-rose-700 border-rose-200',
+  };
+  return (
+    <span className={`inline-block px-2 py-0.5 text-xs rounded-full border ${colorMap[r.color]}`}>
+      {r.label}
+    </span>
+  );
+};
+
+const TreatmentForm = ({ initial, customers, onSave, onCancel, onDelete }) => {
+  const isEdit = !!(initial && initial.createdAt && initial.id);
+  const [form, setForm] = useState(() => initial || {
+    id: genId('tr'),
+    customerId: '',
+    treatmentDate: '',
+    staffRole: 'thermal',
+    staffName: '',
+    menuName: '',
+    clientStatement: '',
+    treatmentContent: '',
+    observation: '',
+    medicalReferralNeeded: false,
+    medicalReferralDetail: '',
+    notes: '',
+    createdAt: nowISO(),
+    updatedAt: nowISO(),
+  });
+
+  const update = (field, v) => setForm({ ...form, [field]: v });
+  const isPT = form.staffRole === 'pt';
+
+  const selectedCustomer = customers.find(c => c.id === form.customerId);
+  const internalShareDenied = selectedCustomer && !selectedCustomer.consent?.internalShare;
+
+  const handleSubmit = () => {
+    if (!form.customerId) { alert('顧客を選択してください。'); return; }
+    if (!form.treatmentDate) { alert('施術日時を入力してください。'); return; }
+    if (!form.clientStatement.trim()) { alert('クライアントの訴えを入力してください。'); return; }
+    if (!form.treatmentContent.trim()) { alert('実施したケア・施術内容を入力してください。'); return; }
+    if (isPT && form.medicalReferralNeeded && !form.medicalReferralDetail.trim()) {
+      alert('医師連携が必要な場合は、内容を記入してください。'); return;
+    }
+    const final = { ...form, updatedAt: nowISO() };
+    if (!isEdit) final.createdAt = nowISO();
+    onSave(final);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="border-b border-stone-200 px-5 py-3 flex items-center justify-between">
+          <h3 className="serif-jp text-lg text-stone-800">{isEdit ? '施術記録の編集' : '施術記録の新規追加'}</h3>
+          <button onClick={onCancel} className="text-stone-400 hover:text-stone-600"><Icon name="x" /></button>
+        </div>
+        <div className="px-5 py-4 space-y-4">
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">顧客 <span className="text-rose-500">*</span></label>
+            <select value={form.customerId} onChange={e => update('customerId', e.target.value)}
+              className="w-full border border-stone-300 rounded px-3 py-2 text-sm">
+              <option value="">選択してください</option>
+              {customers.map(c => (
+                <option key={c.id} value={c.id}>{c.pseudonym}{c.consent?.internalShare ? '' : ' ⚠'}</option>
+              ))}
+            </select>
+            {internalShareDenied && (
+              <div className="mt-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded px-2 py-1 flex items-start gap-1">
+                <Icon name="alert-circle" className="mt-0.5 w-3 h-3" />
+                <span>この顧客は「内部共有」未同意です。記録はスタッフ間で共有されません(本人と担当のみ)。</span>
+              </div>
+            )}
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">施術日時 <span className="text-rose-500">*</span></label>
+              <input type="datetime-local" value={form.treatmentDate} onChange={e => update('treatmentDate', e.target.value)}
+                className="w-full border border-stone-300 rounded px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">担当職種</label>
+              <select value={form.staffRole} onChange={e => update('staffRole', e.target.value)}
+                className="w-full border border-stone-300 rounded px-3 py-2 text-sm">
+                {Object.entries(STAFF_ROLES).map(([k, v]) => (
+                  <option key={k} value={k}>{v.label}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">担当者名</label>
+              <input type="text" value={form.staffName} onChange={e => update('staffName', e.target.value)}
+                className="w-full border border-stone-300 rounded px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">メニュー名</label>
+              <input type="text" value={form.menuName} onChange={e => update('menuName', e.target.value)}
+                className="w-full border border-stone-300 rounded px-3 py-2 text-sm" placeholder="例:新月(温熱60分)" />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">
+              クライアントの訴え <span className="text-rose-500">*</span>
+            </label>
+            <textarea value={form.clientStatement} onChange={e => update('clientStatement', e.target.value)}
+              rows={3} className="w-full border border-stone-300 rounded px-3 py-2 text-sm"
+              placeholder="例:最近、肩こりがひどい。デスクワークが続いている。" />
+            <div className="text-xs text-stone-500 mt-1">クライアントが自ら発した事実を記録してください。</div>
+          </div>
+
+          {isPT && (
+            <div className="bg-sky-50/40 border border-sky-100 rounded p-3 space-y-3">
+              <div className="text-xs font-medium text-sky-800 flex items-center gap-1">
+                <Icon name="alert-circle" className="w-3 h-3" />
+                PT固有項目(理学療法士の専門領域)
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-stone-600 mb-1">専門職としての観察・評価</label>
+                <textarea value={form.observation} onChange={e => update('observation', e.target.value)}
+                  rows={3} className="w-full border border-stone-300 rounded px-3 py-2 text-sm"
+                  placeholder="例:右肩の可動域がやや制限あり。姿勢前傾傾向。" />
+                <div className="text-xs text-stone-500 mt-1">PTとしての観察事項。診断ではありません。</div>
+              </div>
+            </div>
+          )}
+
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">
+              実施したケア・施術内容 <span className="text-rose-500">*</span>
+            </label>
+            <textarea value={form.treatmentContent} onChange={e => update('treatmentContent', e.target.value)}
+              rows={3} className="w-full border border-stone-300 rounded px-3 py-2 text-sm"
+              placeholder={isPT ? '例:肩関節周囲のストレッチ、姿勢指導' : '例:温熱60分(背中・肩中心)'} />
+          </div>
+
+          {isPT && (
+            <div className="bg-sky-50/40 border border-sky-100 rounded p-3 space-y-3">
+              <div>
+                <label className="flex items-center gap-2 text-sm">
+                  <input type="checkbox" checked={form.medicalReferralNeeded} onChange={e => update('medicalReferralNeeded', e.target.checked)}
+                    className="w-4 h-4" />
+                  <span className="font-medium text-stone-800">医師連携が必要</span>
+                </label>
+                <div className="text-xs text-stone-500 mt-1 ml-6">PT の観察上、診断や治療判断が必要と思われる場合にチェック</div>
+              </div>
+              {form.medicalReferralNeeded && (
+                <div>
+                  <label className="block text-xs font-medium text-stone-600 mb-1">
+                    医師に伝えるべき内容 <span className="text-rose-500">*</span>
+                  </label>
+                  <textarea value={form.medicalReferralDetail} onChange={e => update('medicalReferralDetail', e.target.value)}
+                    rows={3} className="w-full border border-stone-300 rounded px-3 py-2 text-sm"
+                    placeholder="例:右肩に局所的な腫れと熱感あり。医師の診察を勧奨。" />
+                </div>
+              )}
+            </div>
+          )}
+
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">運営メモ(任意・対外非開示)</label>
+            <textarea value={form.notes} onChange={e => update('notes', e.target.value)}
+              rows={2} className="w-full border border-stone-300 rounded px-3 py-2 text-sm" />
+          </div>
+
+          <div className="bg-amber-50 border border-amber-200 rounded p-3 text-xs text-amber-800 flex items-start gap-2">
+            <Icon name="alert-circle" className="mt-0.5 w-3 h-3 flex-shrink-0" />
+            <span>本サービスは予防・養生支援を目的とし、医療行為ではありません。診断・症状名・治療判断は記録しません(医師法・薬機法準拠)。</span>
+          </div>
+        </div>
+        <div className="border-t border-stone-200 px-5 py-3 flex items-center justify-between">
+          <div>
+            {isEdit && (
+              <button onClick={() => onDelete && onDelete(form.id)} className="px-3 py-1.5 text-xs bg-rose-50 text-rose-700 border border-rose-200 rounded hover:bg-rose-100">
+                この記録を削除
+              </button>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <button onClick={onCancel} className="px-4 py-2 text-sm border border-stone-300 rounded text-stone-600 hover:bg-stone-50">キャンセル</button>
+            <button onClick={handleSubmit} className="px-4 py-2 text-sm bg-stone-800 text-white rounded hover:bg-stone-900">{isEdit ? '更新' : '登録'}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RecordsPage = ({ treatments, customers, onSave, onDelete }) => {
+  const [filterRole, setFilterRole] = useState('all');
+  const [filterCustomer, setFilterCustomer] = useState('all');
+  const [editing, setEditing] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  const filtered = treatments
+    .filter(t => filterRole === 'all' || t.staffRole === filterRole)
+    .filter(t => filterCustomer === 'all' || t.customerId === filterCustomer)
+    .slice().sort((a, b) => (b.treatmentDate || '').localeCompare(a.treatmentDate || ''));
+
+  const openNew = () => { setEditing(null); setShowForm(true); };
+  const openEdit = (t) => { setEditing(t); setShowForm(true); };
+  const closeForm = () => { setShowForm(false); setEditing(null); };
+
+  const handleSave = (t) => { onSave(t); closeForm(); };
+  const handleDelete = (id) => {
+    if (!confirm('この記録を削除します。よろしいですか?')) return;
+    onDelete(id);
+    closeForm();
+  };
+
+  const custName = (cid) => customers.find(c => c.id === cid)?.pseudonym || '(削除済)';
+
+  return (
+    <div className="max-w-5xl mx-auto px-4 py-6">
+      <div className="flex items-start justify-between mb-2">
+        <div>
+          <h2 className="serif-jp text-2xl text-stone-800">施術記録</h2>
+          <p className="text-sm text-stone-500">サロン施術の記録(PT・温熱療法士・エステティシャン)</p>
+        </div>
+        <button onClick={openNew} className="px-3 py-2 bg-stone-800 text-white text-sm rounded hover:bg-stone-900 flex items-center gap-1">
+          <Icon name="plus" /> 新規追加
+        </button>
+      </div>
+
+      <div className="mt-4 mb-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div>
+          <label className="block text-xs font-medium text-stone-600 mb-1">担当職種で絞り込み</label>
+          <div className="flex flex-wrap gap-2">
+            <button onClick={() => setFilterRole('all')}
+              className={`px-3 py-1 text-xs rounded-full border ${filterRole === 'all' ? 'bg-stone-800 text-white border-stone-800' : 'bg-white text-stone-600 border-stone-300 hover:bg-stone-50'}`}>
+              全て
+            </button>
+            {Object.entries(STAFF_ROLES).map(([k, v]) => (
+              <button key={k} onClick={() => setFilterRole(k)}
+                className={`px-3 py-1 text-xs rounded-full border ${filterRole === k ? 'bg-stone-800 text-white border-stone-800' : 'bg-white text-stone-600 border-stone-300 hover:bg-stone-50'}`}>
+                {v.label} <span className="opacity-75">({treatments.filter(t => t.staffRole === k).length})</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-stone-600 mb-1">顧客で絞り込み</label>
+          <select value={filterCustomer} onChange={e => setFilterCustomer(e.target.value)}
+            className="w-full border border-stone-300 rounded px-3 py-2 text-sm">
+            <option value="all">全て</option>
+            {customers.map(c => (
+              <option key={c.id} value={c.id}>{c.pseudonym}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {filtered.length === 0 ? (
+        <div className="bg-white border border-stone-200 border-dashed rounded-lg p-12 text-center">
+          <div className="text-stone-400 mb-2"><Icon name="file-text" className="w-12 h-12 mx-auto" /></div>
+          <div className="text-sm text-stone-500">該当する記録はありません</div>
+          {customers.length === 0 ? (
+            <div className="mt-3 text-xs text-stone-400">先に顧客を登録してください</div>
+          ) : (
+            <button onClick={openNew} className="mt-3 text-xs text-amber-700 hover:underline">新しい記録を追加する →</button>
+          )}
+        </div>
+      ) : (
+        <div className="bg-white border border-stone-200 rounded-lg overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-stone-50 border-b border-stone-200">
+              <tr className="text-left text-xs text-stone-600">
+                <th className="px-3 py-2">施術日時</th>
+                <th className="px-3 py-2">顧客名</th>
+                <th className="px-3 py-2">担当職種</th>
+                <th className="px-3 py-2">メニュー</th>
+                <th className="px-3 py-2">担当者</th>
+                <th className="px-3 py-2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map(t => (
+                <tr key={t.id} className="border-b border-stone-100 hover:bg-amber-50/30 cursor-pointer" onClick={() => openEdit(t)}>
+                  <td className="px-3 py-2 text-stone-700">{fmtDateTime(t.treatmentDate)}</td>
+                  <td className="px-3 py-2 font-medium text-stone-800">{custName(t.customerId)}</td>
+                  <td className="px-3 py-2"><StaffRoleBadge role={t.staffRole} /></td>
+                  <td className="px-3 py-2 text-stone-600">{t.menuName || '-'}</td>
+                  <td className="px-3 py-2 text-stone-600">{t.staffName || '-'}</td>
+                  <td className="px-3 py-2 text-right">
+                    {t.staffRole === 'pt' && t.medicalReferralNeeded && (
+                      <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-rose-50 text-rose-700 border border-rose-200 mr-2">医師連携</span>
+                    )}
+                    <Icon name="chevron-right" className="text-stone-400 inline" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      <div className="mt-6 bg-stone-50 border border-stone-200 rounded p-3 space-y-2 text-xs text-stone-500">
+        <div className="font-medium text-stone-700 mb-1">専門職別の記録対象(法令準拠)</div>
+        <div className="flex items-start gap-2">
+          <Icon name="check-circle" className="text-emerald-600 mt-0.5 w-3 h-3" />
+          <span><strong>理学療法士(PT)</strong>:訴え + 観察・評価 + 実施ケア + 医師連携の要否</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <Icon name="check-circle" className="text-emerald-600 mt-0.5 w-3 h-3" />
+          <span><strong>温熱療法士・エステティシャン</strong>:訴え + 実施した施術内容</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <Icon name="alert-circle" className="text-amber-600 mt-0.5 w-3 h-3" />
           <span>医師のみが診断・治療を行えます。本システムでは診断・治療相当の記述は記録しません。</span>
         </div>
       </div>
+
+      {showForm && (
+        <TreatmentForm
+          initial={editing}
+          customers={customers}
+          onSave={handleSave}
+          onCancel={closeForm}
+          onDelete={handleDelete}
+        />
+      )}
     </div>
-  </div>
-);
+  );
+};
 
 // ============================================================
 // 設定ページ(同意管理・操作ログ・データエクスポート・データ初期化)
 // ============================================================
-const SettingsPage = ({ customers, onClearAll }) => {
+const SettingsPage = ({ customers, treatments = [], keigetsuSessions = [], reservations = [], onClearAll }) => {
   const [showAudit, setShowAudit] = useState(false);
   const [auditLogs, setAuditLogs] = useState([]);
 
@@ -891,6 +2225,9 @@ const SettingsPage = ({ customers, onClearAll }) => {
     const data = {
       exportedAt: nowISO(),
       customers,
+      reservations,
+      treatments,
+      keigetsuSessions,
       audit: JSON.parse(localStorage.getItem('mikazuki_audit') || '[]'),
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -900,11 +2237,11 @@ const SettingsPage = ({ customers, onClearAll }) => {
     a.download = `salon_mikazuki_export_${new Date().toISOString().slice(0,10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    appendAuditLog('export', 'all', `${customers.length} customers`);
+    appendAuditLog('export', 'all', `${customers.length} customers / ${reservations.length} reservations / ${treatments.length} treatments / ${keigetsuSessions.length} keigetsu`);
   };
 
   const handleClearAll = () => {
-    if (!confirm('全データ(顧客マスター・操作ログ等)を削除します。\nこの操作は取り消せません。よろしいですか?')) return;
+    if (!confirm('全データ(顧客マスター・来店予約・施術記録・慧月予約・操作ログ等)を削除します。\nこの操作は取り消せません。よろしいですか?')) return;
     if (!confirm('本当によろしいですか?もう一度確認します。')) return;
     onClearAll();
   };
@@ -1015,6 +2352,9 @@ const SettingsPage = ({ customers, onClearAll }) => {
 const App = () => {
   const [page, setPage] = useState('dashboard');
   const [customers, setCustomers] = useLocalState('mikazuki_customers', []);
+  const [treatments, setTreatments] = useLocalState('mikazuki_treatments', []);
+  const [keigetsuSessions, setKeigetsuSessions] = useLocalState('mikazuki_keigetsu_sessions', []);
+  const [reservations, setReservations] = useLocalState('mikazuki_reservations', []);
   const [editingId, setEditingId] = useState(null);
   const [viewingId, setViewingId] = useState(null);
   const [showForm, setShowForm] = useState(false);
@@ -1044,6 +2384,60 @@ const App = () => {
     setViewingId(null);
   };
 
+  // 施術記録の保存
+  const saveTreatment = (record) => {
+    const exists = treatments.find(t => t.id === record.id);
+    if (exists) {
+      setTreatments(treatments.map(t => t.id === record.id ? record : t));
+      appendAuditLog('update', `treatment:${record.id}`, `customer=${record.customerId}, role=${record.staffRole}`);
+    } else {
+      setTreatments([...treatments, record]);
+      appendAuditLog('create', `treatment:${record.id}`, `customer=${record.customerId}, role=${record.staffRole}`);
+    }
+  };
+
+  // 施術記録の削除
+  const deleteTreatment = (id) => {
+    setTreatments(treatments.filter(t => t.id !== id));
+    appendAuditLog('delete', `treatment:${id}`);
+  };
+
+  // 慧月予約の保存
+  const saveKeigetsuSession = (record) => {
+    const exists = keigetsuSessions.find(s => s.id === record.id);
+    if (exists) {
+      setKeigetsuSessions(keigetsuSessions.map(s => s.id === record.id ? record : s));
+      appendAuditLog('update', `keigetsu:${record.id}`, `customer=${record.customerName}, status=${record.status}`);
+    } else {
+      setKeigetsuSessions([...keigetsuSessions, record]);
+      appendAuditLog('create', `keigetsu:${record.id}`, `customer=${record.customerName}, status=${record.status}`);
+    }
+  };
+
+  // 慧月予約の削除
+  const deleteKeigetsuSession = (id) => {
+    setKeigetsuSessions(keigetsuSessions.filter(s => s.id !== id));
+    appendAuditLog('delete', `keigetsu:${id}`);
+  };
+
+  // 来店予約の保存
+  const saveReservation = (record) => {
+    const exists = reservations.find(r => r.id === record.id);
+    if (exists) {
+      setReservations(reservations.map(r => r.id === record.id ? record : r));
+      appendAuditLog('update', `reservation:${record.id}`, `customer=${record.customerName}, status=${record.status}, source=${record.source}`);
+    } else {
+      setReservations([...reservations, record]);
+      appendAuditLog('create', `reservation:${record.id}`, `customer=${record.customerName}, source=${record.source}`);
+    }
+  };
+
+  // 来店予約の削除
+  const deleteReservation = (id) => {
+    setReservations(reservations.filter(r => r.id !== id));
+    appendAuditLog('delete', `reservation:${id}`);
+  };
+
   // 顧客選択(詳細表示)
   const selectCustomer = (id) => {
     setViewingId(id);
@@ -1071,6 +2465,9 @@ const App = () => {
   // 全データクリア
   const clearAll = () => {
     setCustomers([]);
+    setTreatments([]);
+    setKeigetsuSessions([]);
+    setReservations([]);
     localStorage.removeItem('mikazuki_audit');
     appendAuditLog('reset', 'all', 'all data cleared');
     setPage('dashboard');
@@ -1108,6 +2505,8 @@ const App = () => {
           customer={viewingCustomer}
           onBack={() => setViewingId(null)}
           onEdit={openEdit}
+          treatments={treatments}
+          keigetsuSessions={keigetsuSessions}
         />
       );
     } else {
@@ -1120,14 +2519,37 @@ const App = () => {
         />
       );
     }
+  } else if (page === 'reservation') {
+    content = (
+      <ReservationPage
+        reservations={reservations}
+        customers={customers}
+        onSave={saveReservation}
+        onDelete={deleteReservation}
+      />
+    );
   } else if (page === 'keigetsu') {
-    content = <KeigetsuPage />;
+    content = (
+      <KeigetsuPage
+        sessions={keigetsuSessions}
+        customers={customers}
+        onSave={saveKeigetsuSession}
+        onDelete={deleteKeigetsuSession}
+      />
+    );
   } else if (page === 'records') {
-    content = <RecordsPage />;
+    content = (
+      <RecordsPage
+        treatments={treatments}
+        customers={customers}
+        onSave={saveTreatment}
+        onDelete={deleteTreatment}
+      />
+    );
   } else if (page === 'settings') {
-    content = <SettingsPage customers={customers} onClearAll={clearAll} />;
+    content = <SettingsPage customers={customers} treatments={treatments} keigetsuSessions={keigetsuSessions} reservations={reservations} onClearAll={clearAll} />;
   } else {
-    content = <Dashboard customers={customers} onNav={onNav} />;
+    content = <Dashboard customers={customers} treatments={treatments} keigetsuSessions={keigetsuSessions} reservations={reservations} onNav={onNav} />;
   }
 
   return (
